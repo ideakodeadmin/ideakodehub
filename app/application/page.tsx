@@ -726,24 +726,27 @@ export default function ApplicationPage() {
                     Team Preferences
                   </h2>
                   <div className="grid sm:grid-cols-3 gap-4">
-                    {['first', 'second', 'third'].map((pref, index) => (
-                      <div key={pref}>
-                        <label className="block text-sm font-medium text-ink-300 mb-2">
-                          {index === 0 ? 'First' : index === 1 ? 'Second' : 'Third'} Preference
-                        </label>
-                        <select
-                          name={`${pref}_preference`}
-                          value={formData[`${pref}_preference` as keyof ApplicationForm]}
-                          onChange={handleChange}
-                          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
-                        >
-                          <option value="" className="bg-ink-900">Select Team</option>
-                          {teamPreferences.map(team => (
-                            <option key={team} value={team} className="bg-ink-900">{team}</option>
-                          ))}
-                        </select>
-                      </div>
-                    ))}
+                    {['first', 'second', 'third'].map((pref, index) => {
+                      const fieldName = `${pref}_preference` as 'first_preference' | 'second_preference' | 'third_preference';
+                      return (
+                        <div key={pref}>
+                          <label className="block text-sm font-medium text-ink-300 mb-2">
+                            {index === 0 ? 'First' : index === 1 ? 'Second' : 'Third'} Preference
+                          </label>
+                          <select
+                            name={fieldName}
+                            value={formData[fieldName]}
+                            onChange={handleChange}
+                            className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+                          >
+                            <option value="" className="bg-ink-900">Select Team</option>
+                            {teamPreferences.map(team => (
+                              <option key={team} value={team} className="bg-ink-900">{team}</option>
+                            ))}
+                          </select>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
